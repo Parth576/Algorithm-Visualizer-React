@@ -19,7 +19,9 @@ const updateDistance = (grid, currentNode) => {
 
   for (let v of neighbours) {
     v.distance = currentNode.distance + 1;
-    v.previousNode = currentNode;
+    if (v.previousNode === null && currentNode.previousNode !== v) {
+      v.previousNode = currentNode;
+    }
   }
 };
 
@@ -39,6 +41,7 @@ export const dijkstra = (grid, startNode, finishNode) => {
 };
 
 export const getShortestPath = (finishNode) => {
+  console.log("starting to find shortest path");
   let shortestPath = [];
   let currentNode = finishNode;
   while (currentNode !== null) {

@@ -10,6 +10,7 @@ const Node = (props) => {
     isStart,
     isWall,
     isVisited,
+    isShortest,
     mouseDown,
     mouseEnter,
     mouseUp,
@@ -20,6 +21,8 @@ const Node = (props) => {
     ? "node-start"
     : isWall
     ? "node-wall"
+    : isShortest
+    ? "node-shortest"
     : isVisited
     ? "node-visited"
     : "";
@@ -27,9 +30,9 @@ const Node = (props) => {
     <div
       id={`node-${row}-${col}`}
       className={`node ${extraClassName}`}
-      onMouseDown={() => mouseDown(row, col)}
-      onMouseEnter={() => mouseEnter(row, col)}
-      onMouseUp={() => mouseUp()}
+      onMouseDown={() => mouseDown(row, col, isStart, isFinish)}
+      onMouseEnter={() => mouseEnter(row, col, isStart, isFinish)}
+      onMouseUp={() => mouseUp(row, col, isStart, isFinish)}
     ></div>
   );
 };
